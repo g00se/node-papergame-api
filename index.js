@@ -41,7 +41,7 @@ module.exports = class PaperGameAPI {
     		}
     		).then((response)=>{
     			//console.log(response);
-    			cb(response['success']);
+    			cb(response);
     			 // {"success":true,"amount":100,"to":"{ID кому}","current":56}
 
     		});
@@ -77,7 +77,7 @@ module.exports = class PaperGameAPI {
  * last_tx_id - номер последнего перевода после которого показать переводы
  *
  */
- 	txList(last_tx_id){
+ 	txList(last_tx_id,cb){
 
     request(
             'https://paper.12kot3k.ru/api.php',
@@ -95,10 +95,14 @@ module.exports = class PaperGameAPI {
             }
         ).then((response)=>{
           
-          var txs = response['tx_list'];
-          if(txs.length>0){
-          console.log('получено %s транзакций',txs.length);
-        }
+          if(txs.success){
+          	var txs = response['tx_list'];
+          	cb(false,txs);
+          }else {
+          	cb(new Error('Не удалось получить txList'));
+          }
+
+          
       });
  }
 
@@ -125,7 +129,6 @@ module.exports = class PaperGameAPI {
 
 /*
 * Получить ссылку на перевод
-* id кому перевод
 * summa - сумма
 */
 get_link(summa){
@@ -139,12 +142,6 @@ get_link(summa){
 
 
 };
-
-
-
-
-
-
 
 
 
