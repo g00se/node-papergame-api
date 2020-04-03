@@ -95,7 +95,7 @@ module.exports = class PaperGameAPI {
             }
         ).then((response)=>{
           
-          if(txs.success){
+          if(response['success']){
           	var txs = response['tx_list'];
           	cb(false,txs);
           }else {
@@ -142,6 +142,12 @@ get_link(summa){
 
 
 };
+
+
+
+
+
+
 
 
 
