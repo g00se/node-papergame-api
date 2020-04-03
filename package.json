@@ -12,6 +12,7 @@
   ],
   "author": "Mikhail (@g00se)",
   "license": "GPL-3.0",
+  "homepage": "https://github.com/g00se/node-papergame-api/",
   "dependencies": {
     "request": "^2.88.2",
     "request-promise": "^4.2.5"
